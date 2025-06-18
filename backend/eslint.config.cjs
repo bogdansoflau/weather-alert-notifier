@@ -1,4 +1,4 @@
-import js from "@eslint/js";
+const js = require("@eslint/js");
 import tsParser from "@typescript-eslint/parser";
 import tsPlugin from "@typescript-eslint/eslint-plugin";
 
