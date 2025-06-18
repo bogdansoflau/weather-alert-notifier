@@ -4,9 +4,11 @@ import { FaUser, FaLock } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-export default function AuthPage() {
+export default function SignUpPage() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirm, setConfirm] = useState("");
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
@@ -14,10 +16,16 @@ export default function AuthPage() {
     e.preventDefault();
     setError(null);
 
+    if (password !== confirm) {
+      setError("Passwords do not match");
+      return;
+    }
+
     try {
       const { data } = await axios.post(
-        "http://localhost:3001/api/auth/login",
+        "http://localhost:3001/api/auth/register",
         {
+          name,
           email,
           password,
         }
@@ -27,7 +35,7 @@ export default function AuthPage() {
       navigate("/dashboard", { state: { user: data.user } });
     } catch (err: any) {
       setError(
-        err.response?.data?.message || "Login failed. Please try again."
+        err.response?.data?.message || "Registration failed. Please try again."
       );
     }
   };
@@ -43,12 +51,24 @@ export default function AuthPage() {
     >
       <div className="relative z-10 bg-gray-900 bg-opacity-80 rounded-2xl p-10 shadow-2xl backdrop-blur-lg max-w-sm w-full">
         <h1 className="text-4xl font-extrabold text-white mb-6 text-center">
-          🌦️ Welcome to Weather Alerts
+          🌤️ Create Your Account
         </h1>
 
         {error && <div className="mb-4 text-center text-red-400">{error}</div>}
 
         <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="flex items-center border border-white rounded-lg p-3 bg-transparent">
+            <FaUser className="text-white mr-3" />
+            <input
+              type="text"
+              placeholder="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              className="bg-transparent flex-1 outline-none text-white placeholder-gray-400"
+            />
+          </div>
+
           <div className="flex items-center border border-white rounded-lg p-3 bg-transparent">
             <FaUser className="text-white mr-3" />
             <input
@@ -73,6 +93,18 @@ export default function AuthPage() {
             />
           </div>
 
+          <div className="flex items-center border border-white rounded-lg p-3 bg-transparent">
+            <FaLock className="text-white mr-3" />
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              value={confirm}
+              onChange={(e) => setConfirm(e.target.value)}
+              required
+              className="bg-transparent flex-1 outline-none text-white placeholder-gray-400"
+            />
+          </div>
+
           <button
             type="submit"
             className="
@@ -80,14 +112,14 @@ export default function AuthPage() {
               border border-white hover:border-purple-500 transition
             "
           >
-            Sign In
+            Sign Up
           </button>
         </form>
 
         <p className="mt-6 text-center text-gray-400">
-          Don’t have an account?{" "}
-          <Link to="/register" className="text-purple-400 hover:underline">
-            Sign up
+          Already have an account?{" "}
+          <Link to="/auth" className="text-purple-400 hover:underline">
+            Sign in
           </Link>
         </p>
       </div>
