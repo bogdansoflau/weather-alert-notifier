@@ -1,0 +1,11 @@
+# Node
+node_modules/
+npm-debug.log
+.env
+
+# React build
+frontend/node_modules/
+frontend/build/
+
+# Docker
+dist/
