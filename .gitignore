@@ -2,6 +2,7 @@
 node_modules/
 npm-debug.log
 .env
+backend/coverage
 
 # React build
 frontend/node_modules/
