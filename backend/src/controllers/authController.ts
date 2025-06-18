@@ -9,7 +9,7 @@ const JWT_EXPIRES_IN = "1h";
 export async function register(
   req: Request,
   res: Response,
-  next: NextFunction
+  _next: NextFunction
 ): Promise<void> {
   try {
     const { name, email, password } = req.body;
@@ -39,7 +39,7 @@ export async function register(
 export async function login(
   req: Request,
   res: Response,
-  next: NextFunction
+  _next: NextFunction
 ): Promise<void> {
   try {
     const { email, password } = req.body;
@@ -55,7 +55,7 @@ export async function login(
       token,
       user: { id: user._id, name: user.name, email: user.email },
     });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("❌ Login error:", err);
     res.status(500).json({
       message: "Server error during login",

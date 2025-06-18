@@ -77,7 +77,7 @@ describe("POST /api/auth/login", () => {
     const payload = jwt.verify(
       res.body.token,
       process.env.JWT_SECRET as string
-    ) as any;
+    ) as unknown as { id: string };
     expect(payload).toHaveProperty("id");
   });
 

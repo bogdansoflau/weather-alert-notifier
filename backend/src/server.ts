@@ -2,8 +2,6 @@ import "dotenv/config";
 import mongoose from "mongoose";
 import app from "./app";
 
-console.log("JWT_SECRET is:", process.env.JWT_SECRET ? "[SET]" : "[MISSING]");
-
 // Connect MongoDB
 mongoose
   .connect(process.env.MONGODB_URI!)
