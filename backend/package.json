@@ -7,7 +7,8 @@
     "start": "ts-node -r dotenv/config src/server.ts",
     "dev": "ts-node-dev --respawn --transpile-only -r dotenv/config src/server.ts",
     "lint": "eslint src --ext .ts",
-    "test": "jest --runInBand"
+    "test": "jest --runInBand",
+    "coverage": "jest --coverage --runInBand"
   },
   "keywords": [],
   "author": "",
