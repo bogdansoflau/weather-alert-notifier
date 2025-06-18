@@ -29,15 +29,19 @@ jobs:
           cache: "npm"
 
       - name: Install dependencies
+        working-directory: ./backend
         run: npm ci
 
       - name: Run linter
+        working-directory: ./backend
         run: npm run lint
 
       - name: Build project (tsc)
+        working-directory: ./backend
         run: npm run build
 
       - name: Run tests
+        working-directory: ./backend
         env:
           CI: true
         run: npm test -- --coverage
