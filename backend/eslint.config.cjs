@@ -1,6 +1,6 @@
 const js = require("@eslint/js");
-import tsParser from "@typescript-eslint/parser";
-import tsPlugin from "@typescript-eslint/eslint-plugin";
+const tsParser = require("@typescript-eslint/parser");
+const tsPlugin = require("@typescript-eslint/eslint-plugin");
 
 const nodeGlobals = {
   process: "readonly",
@@ -11,12 +11,9 @@ const nodeGlobals = {
 };
 
 /** @type {import("eslint").FlatESLintConfig[]} */
-export default [
-  /* ignore build artefacts */
+module.exports = [
   { ignores: ["dist/**", "coverage/**"] },
   js.configs.recommended,
-
-  /* TypeScript rules for every *.ts file */
   {
     files: ["**/*.ts"],
     languageOptions: {
@@ -39,8 +36,6 @@ export default [
       "@typescript-eslint/explicit-module-boundary-types": "off",
     },
   },
-
-  /* Jest globals only for test files */
   {
     files: ["**/*.test.ts", "**/__tests__/**/*.ts"],
     languageOptions: {
