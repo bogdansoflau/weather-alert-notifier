@@ -12,9 +12,9 @@ module.exports = {
   coverageDirectory: "coverage",
   collectCoverageFrom: [
     "src/**/*.ts",
-    "!src/server.ts", // omit your entrypoint if you like
-    "!src/app.ts", // omit if you’re not actually testing it
-    "!src/**/index.ts", // ignore barrels
+    "!src/server.ts",
+    "!src/app.ts",
+    "!src/**/index.ts",
   ],
   coverageReporters: ["json", "lcov", "text", "clover"],
 };

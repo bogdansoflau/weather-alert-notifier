@@ -48,10 +48,11 @@ jobs:
         working-directory: ./backend
         run: npm run build
 
-      - name: Run tests
+      - name: Run tests + coverage
         working-directory: ./backend
         env:
           CI: true
+          JWT_SECRET: ${{secrets.JWT_SECRET}}
         run: npm test -- --coverage
 
       - name: Upload code coverage

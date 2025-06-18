@@ -2,7 +2,6 @@ import js from "@eslint/js";
 import tsParser from "@typescript-eslint/parser";
 import tsPlugin from "@typescript-eslint/eslint-plugin";
 
-/** shorthand for the Node globals we want everywhere */
 const nodeGlobals = {
   process: "readonly",
   console: "readonly",
@@ -15,8 +14,6 @@ const nodeGlobals = {
 export default [
   /* ignore build artefacts */
   { ignores: ["dist/**", "coverage/**"] },
-
-  /* built-in JS recommended rules (no changes) */
   js.configs.recommended,
 
   /* TypeScript rules for every *.ts file */
