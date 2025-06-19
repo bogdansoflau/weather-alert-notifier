@@ -2,7 +2,6 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import authRoutes from "./routes/auth";
 import apiRoutes from "./routes/api";
-import { geocodeHandler } from "./controllers/geocodeController";
 
 const app = express();
 
