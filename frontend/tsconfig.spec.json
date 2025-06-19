@@ -1,0 +1,22 @@
+{
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": {
+    // Switch module system for Jest
+    "module": "commonjs",
+    // Allow default imports from CJS
+    "esModuleInterop": true,
+    // Enable JSX in ts-jest
+    "jsx": "react-jsx",
+    // Turn off verbatimModuleSyntax so Jest can parse imports
+    "verbatimModuleSyntax": false
+
+    // Inherit everything else (strictness, paths, etc.)
+  },
+  "include": [
+    "src",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx"
+  ]
+}

@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import type { FormEvent } from "react";
+import type { User } from "../types";
 import { FaUser, FaLock } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -22,21 +23,30 @@ export default function SignUpPage() {
     }
 
     try {
-      const { data } = await axios.post(
-        "http://localhost:3001/api/auth/register",
-        {
-          name,
-          email,
-          password,
-        }
-      );
+      const { data } = await axios.post<{
+        token: string;
+        user: User;
+      }>("http://localhost:3001/api/auth/register", {
+        name,
+        email,
+        password,
+      });
 
       localStorage.setItem("token", data.token);
       navigate("/dashboard", { state: { user: data.user } });
-    } catch (err: any) {
-      setError(
-        err.response?.data?.message || "Registration failed. Please try again."
-      );
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err)) {
+        // Your API likely returns { message: string } in the body
+        const msg =
+          (err.response?.data as { message?: string })?.message ||
+          err.message ||
+          "Registration failed. Please try again.";
+        setError(msg);
+      } else if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("Registration failed. Please try again.");
+      }
     }
   };
 
