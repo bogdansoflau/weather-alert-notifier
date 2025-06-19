@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import { useLocation, Navigate } from "react-router-dom";
 import { debounce } from "lodash";
 import { Search, User as UserIcon } from "lucide-react";
 import {
@@ -13,24 +13,23 @@ import {
   CloudFog,
 } from "lucide-react";
 
-import type { User, Suggestion, HistoryItem, WeatherData } from "../types";
+import type { User, Suggestion, WeatherData } from "../types";
 import {
   fetchSuggestions,
+  fetchSavedLocations,
+  addSavedLocation,
+  removeSavedLocation,
   fetchForecast,
-  fetchUserHistory,
-  saveSearch,
 } from "../services/weatherService";
 import axios from "axios";
 
 export default function MainPage() {
-  // —── get routing state
   const location = useLocation();
   const state = location.state as
     | { user: User; lat?: number; lon?: number; name?: string }
     | undefined;
   const user = state?.user;
 
-  // —── hooks (always unconditional)
   const [cityQuery, setCityQuery] = useState("");
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -38,11 +37,11 @@ export default function MainPage() {
     null
   );
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
-  const [history, setHistory] = useState<HistoryItem[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [showAllAlerts, setShowAllAlerts] = useState(false);
+  const [saved, setSaved] = useState<Suggestion[]>([]);
 
   const alerts = weatherData?.alerts ?? [];
 
@@ -57,19 +56,53 @@ export default function MainPage() {
     }, 250)
   ).current;
 
-  // —── fetch history when we have a user
-  useEffect(() => {
-    if (!user) return;
-    fetchUserHistory(user.id).then(setHistory).catch(console.error);
-  }, [user]);
+  const handleSearch = useCallback(
+    async (locArg?: Suggestion) => {
+      const loc = locArg || selectedLocation;
+      if (!loc || !user) return;
+      setSelectedLocation(loc);
+      setCityQuery(loc.name);
+      setLoading(true);
+      setError(null);
 
-  // —── deep-linking from history state
+      try {
+        const data = await fetchForecast(loc.lat, loc.lon);
+        setWeatherData(data);
+        setCityQuery("");
+      } catch (err: unknown) {
+        if (axios.isAxiosError(err)) {
+          const msg =
+            (err.response?.data as { message?: string })?.message ||
+            err.message ||
+            "Search failed. Please try again.";
+          setError(msg);
+        } else if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("Search failed. Please try again.");
+        }
+      } finally {
+        setLoading(false);
+      }
+    },
+    [selectedLocation, user]
+  );
+
   useEffect(() => {
-    if (!user) return;
-    if (state?.lat && state.lon) {
+    if (user?.id) {
+      fetchSavedLocations(user.id)
+        .then(setSaved)
+        .catch(() => {
+          setSaved([]);
+        });
+    }
+  }, [user?.id]);
+
+  useEffect(() => {
+    if (user && state?.lat && state.lon && state.name) {
       const loc: Suggestion = {
-        id: state.name || "",
-        name: state.name || "",
+        id: state.name,
+        name: state.name,
         lat: state.lat,
         lon: state.lon,
       };
@@ -77,10 +110,8 @@ export default function MainPage() {
       setCityQuery(loc.name);
       handleSearch(loc);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user, state]);
+  }, [user, state, handleSearch]);
 
-  // —── handlers
   const handleCityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const q = e.target.value;
     setCityQuery(q);
@@ -94,42 +125,6 @@ export default function MainPage() {
     setShowSuggestions(false);
   };
 
-  const handleSearch = async (locArg?: Suggestion) => {
-    const loc = locArg || selectedLocation;
-    if (!loc || !user) return;
-    setLoading(true);
-    setError(null);
-
-    try {
-      const data = await fetchForecast(loc.lat, loc.lon);
-      setWeatherData(data);
-      await saveSearch(user.id, loc);
-      setHistory((prev) =>
-        [loc, ...prev.filter((h) => h.id !== loc.id)].slice(0, 10)
-      );
-    } catch (err: unknown) {
-      // 1) Axios errors often carry a response.data.message
-      if (axios.isAxiosError(err)) {
-        const msg =
-          (err.response?.data as { message?: string })?.message ||
-          err.message ||
-          "Search failed. Please try again.";
-        setError(msg);
-
-        // 2) Plain JS Errors
-      } else if (err instanceof Error) {
-        setError(err.message);
-
-        // 3) Fallback for anything else
-      } else {
-        setError("Search failed. Please try again.");
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // —── icon mapping
   const iconMap: Record<string, React.ElementType> = {
     clear_day: Sun,
     mostly_clear: CloudSun,
@@ -149,14 +144,12 @@ export default function MainPage() {
     return <Comp className="w-8 h-8 mx-auto my-2 text-sky-600" />;
   };
 
-  // —── now bail early if no user
   if (!user) {
-    return (
-      <div className="flex items-center justify-center h-screen text-gray-800">
-        No user data found.
-      </div>
-    );
+    return <Navigate to="/login" replace />;
   }
+
+  const isSaved =
+    Array.isArray(saved) && saved.some((s) => s.id === selectedLocation?.id);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-sky-200 to-white text-gray-800">
@@ -184,6 +177,29 @@ export default function MainPage() {
             >
               Go
             </button>
+            {selectedLocation && !isSaved && (
+              <button
+                onClick={async () => {
+                  if (saved.length >= 5) {
+                    alert("You can save up to 5 locations. Remove one first.");
+                    return;
+                  }
+                  if (!selectedLocation) return; // Type guard
+                  try {
+                    const updated = await addSavedLocation(
+                      user.id,
+                      selectedLocation
+                    );
+                    setSaved(updated);
+                  } catch {
+                    alert("Failed to save location. Try again.");
+                  }
+                }}
+                className="ml-2 px-3 py-1 bg-yellow-400 text-gray-800 rounded"
+              >
+                ☆ Save
+              </button>
+            )}
           </div>
 
           {showSuggestions && suggestions.length > 0 && (
@@ -214,24 +230,42 @@ export default function MainPage() {
               <p className="font-semibold">{user.name}</p>
               <p className="text-sm text-gray-500">{user.email}</p>
             </div>
-            <p className="text-xs uppercase text-sky-600 mb-1">Recent</p>
-            <ul className="space-y-1">
-              {history.map((item) => (
-                <Link
-                  key={item.id}
-                  to="/"
-                  state={{
-                    user,
-                    lat: item.lat,
-                    lon: item.lon,
-                    name: item.name,
-                  }}
-                  className="block text-sm hover:text-sky-600"
-                  onClick={() => setShowProfileMenu(false)}
-                >
-                  {item.name}
-                </Link>
+            <p className="text-xs uppercase text-sky-600 mb-1">
+              Saved locations
+            </p>
+            <ul className="space-y-1 mb-3">
+              {saved.map((loc) => (
+                <li key={loc.id} className="flex justify-between items-center">
+                  <button
+                    onClick={() => {
+                      handleSearch(loc);
+                      setShowProfileMenu(false);
+                    }}
+                    className="text-sm hover:text-sky-600 text-left"
+                  >
+                    {loc.name}
+                  </button>
+                  <button
+                    onClick={async () => {
+                      try {
+                        const updated = await removeSavedLocation(
+                          user.id,
+                          loc.id
+                        );
+                        setSaved(updated);
+                      } catch {
+                        alert("Could not remove location.");
+                      }
+                    }}
+                    className="text-red-500 text-xs px-1"
+                  >
+                    ✕
+                  </button>
+                </li>
               ))}
+              {saved.length === 0 && (
+                <li className="text-xs text-gray-500">No saved locations</li>
+              )}
             </ul>
           </div>
         )}
@@ -242,6 +276,11 @@ export default function MainPage() {
 
       {weatherData && (
         <div className="max-w-4xl mx-auto px-6">
+          {selectedLocation && (
+            <h2 className="text-center text-3xl font-bold my-6">
+              {selectedLocation.name}
+            </h2>
+          )}
           <section className="bg-white shadow rounded-xl flex justify-around py-4 mt-8">
             <div className="text-center">
               <p className="text-sm text-gray-500">Today</p>
@@ -303,7 +342,7 @@ export default function MainPage() {
                 >
                   {showAllAlerts
                     ? "Hide extra alerts"
-                    : `Show all ${alerts.length - 3} more`}
+                    : `Show all ${alerts.length} more`}
                 </button>
               )}
             </section>

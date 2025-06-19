@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1750289379782" clover="3.2.0">
-  <project timestamp="1750289379782" name="All files">
-    <metrics statements="44" coveredstatements="41" conditionals="10" coveredconditionals="7" methods="4" coveredmethods="4" elements="58" coveredelements="52" complexity="0" loc="44" ncloc="44" packages="3" files="3" classes="3"/>
+<coverage generated="1750349916724" clover="3.2.0">
+  <project timestamp="1750349916724" name="All files">
+    <metrics statements="158" coveredstatements="123" conditionals="60" coveredconditionals="26" methods="21" coveredmethods="16" elements="239" coveredelements="165" complexity="0" loc="158" ncloc="158" packages="5" files="11" classes="11"/>
     <package name="controllers">
-      <metrics statements="27" coveredstatements="24" conditionals="8" coveredconditionals="6" methods="2" coveredmethods="2"/>
+      <metrics statements="87" coveredstatements="74" conditionals="28" coveredconditionals="23" methods="13" coveredmethods="13"/>
       <file name="authController.ts" path="/home/bogdan/Desktop/weather-alert-notifier/backend/src/controllers/authController.ts">
         <metrics statements="27" coveredstatements="24" conditionals="8" coveredconditionals="6" methods="2" coveredmethods="2"/>
-        <line num="2" count="1" type="stmt"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="5" count="1" type="stmt"/>
-        <line num="6" count="1" type="stmt"/>
-        <line num="9" count="1" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="9" count="3" type="stmt"/>
         <line num="14" count="2" type="stmt"/>
         <line num="15" count="2" type="stmt"/>
         <line num="16" count="2" type="stmt"/>
@@ -22,7 +22,7 @@
         <line num="25" count="1" type="stmt"/>
         <line num="29" count="1" type="stmt"/>
         <line num="34" count="0" type="stmt"/>
-        <line num="39" count="1" type="stmt"/>
+        <line num="39" count="3" type="stmt"/>
         <line num="44" count="2" type="stmt"/>
         <line num="45" count="2" type="stmt"/>
         <line num="46" count="2" type="stmt"/>
@@ -34,34 +34,178 @@
         <line num="59" count="0" type="stmt"/>
         <line num="60" count="0" type="stmt"/>
       </file>
+      <file name="forecastController.ts" path="/home/bogdan/Desktop/weather-alert-notifier/backend/src/controllers/forecastController.ts">
+        <metrics statements="11" coveredstatements="10" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="10" count="2" type="stmt"/>
+        <line num="12" count="2" type="cond" truecount="4" falsecount="0"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+      </file>
+      <file name="geocodeController.ts" path="/home/bogdan/Desktop/weather-alert-notifier/backend/src/controllers/geocodeController.ts">
+        <metrics statements="8" coveredstatements="8" conditionals="6" coveredconditionals="6" methods="2" coveredmethods="2"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="9" count="3" type="cond" truecount="4" falsecount="0"/>
+        <line num="10" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+      </file>
+      <file name="savedLocationsController.ts" path="/home/bogdan/Desktop/weather-alert-notifier/backend/src/controllers/savedLocationsController.ts">
+        <metrics statements="41" coveredstatements="32" conditionals="10" coveredconditionals="7" methods="8" coveredmethods="8"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="12" count="3" type="stmt"/>
+        <line num="13" count="3" type="stmt"/>
+        <line num="14" count="3" type="stmt"/>
+        <line num="15" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="20" count="3" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="29" count="3" type="stmt"/>
+        <line num="33" count="11" type="stmt"/>
+        <line num="34" count="11" type="stmt"/>
+        <line num="35" count="11" type="stmt"/>
+        <line num="36" count="11" type="stmt"/>
+        <line num="38" count="11" type="stmt"/>
+        <line num="39" count="11" type="cond" truecount="1" falsecount="1"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="45" count="11" type="cond" truecount="2" falsecount="0"/>
+        <line num="46" count="1" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="51" count="12" type="cond" truecount="2" falsecount="0"/>
+        <line num="52" count="1" type="stmt"/>
+        <line num="53" count="1" type="stmt"/>
+        <line num="56" count="9" type="stmt"/>
+        <line num="57" count="9" type="stmt"/>
+        <line num="59" count="9" type="stmt"/>
+        <line num="61" count="0" type="stmt"/>
+        <line num="68" count="3" type="stmt"/>
+        <line num="71" count="3" type="stmt"/>
+        <line num="72" count="1" type="stmt"/>
+        <line num="73" count="1" type="stmt"/>
+        <line num="75" count="1" type="stmt"/>
+        <line num="76" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="77" count="0" type="stmt"/>
+        <line num="78" count="0" type="stmt"/>
+        <line num="81" count="2" type="stmt"/>
+        <line num="82" count="1" type="stmt"/>
+        <line num="84" count="1" type="stmt"/>
+        <line num="86" count="0" type="stmt"/>
+      </file>
     </package>
     <package name="models">
-      <metrics statements="11" coveredstatements="11" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="2"/>
+      <metrics statements="12" coveredstatements="12" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
       <file name="User.ts" path="/home/bogdan/Desktop/weather-alert-notifier/backend/src/models/User.ts">
-        <metrics statements="11" coveredstatements="11" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="2"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
-        <line num="11" count="1" type="stmt"/>
-        <line num="27" count="1" type="stmt"/>
-        <line num="28" count="4" type="cond" truecount="1" falsecount="1"/>
-        <line num="29" count="4" type="stmt"/>
-        <line num="30" count="4" type="stmt"/>
-        <line num="31" count="4" type="stmt"/>
-        <line num="35" count="1" type="stmt"/>
-        <line num="36" count="2" type="stmt"/>
-        <line num="39" count="1" type="stmt"/>
+        <metrics statements="12" coveredstatements="12" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="20" count="3" type="stmt"/>
+        <line num="30" count="3" type="stmt"/>
+        <line num="50" count="3" type="stmt"/>
+        <line num="51" count="19" type="cond" truecount="2" falsecount="0"/>
+        <line num="52" count="9" type="stmt"/>
+        <line num="53" count="9" type="stmt"/>
+        <line num="54" count="9" type="stmt"/>
+        <line num="58" count="3" type="stmt"/>
+        <line num="59" count="2" type="stmt"/>
+        <line num="62" count="3" type="stmt"/>
       </file>
     </package>
     <package name="routes">
-      <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <metrics statements="20" coveredstatements="20" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="api.ts" path="/home/bogdan/Desktop/weather-alert-notifier/backend/src/routes/api.ts">
+        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="10" count="3" type="stmt"/>
+      </file>
       <file name="auth.ts" path="/home/bogdan/Desktop/weather-alert-notifier/backend/src/routes/auth.ts">
         <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
-        <line num="4" count="1" type="stmt"/>
-        <line num="6" count="1" type="stmt"/>
-        <line num="7" count="1" type="stmt"/>
-        <line num="9" count="1" type="stmt"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="9" count="3" type="stmt"/>
+      </file>
+      <file name="savedLocations.ts" path="/home/bogdan/Desktop/weather-alert-notifier/backend/src/routes/savedLocations.ts">
+        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="10" count="3" type="stmt"/>
+        <line num="11" count="3" type="stmt"/>
+        <line num="12" count="3" type="stmt"/>
+        <line num="14" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="services">
+      <metrics statements="37" coveredstatements="15" conditionals="30" coveredconditionals="1" methods="6" coveredmethods="1"/>
+      <file name="forecastService.ts" path="/home/bogdan/Desktop/weather-alert-notifier/backend/src/services/forecastService.ts">
+        <metrics statements="24" coveredstatements="10" conditionals="28" coveredconditionals="1" methods="4" coveredmethods="1"/>
+        <line num="1" count="4" type="stmt"/>
+        <line num="2" count="4" type="stmt"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="7" count="4" type="stmt"/>
+        <line num="36" count="4" type="stmt"/>
+        <line num="40" count="2" type="stmt"/>
+        <line num="41" count="2" type="stmt"/>
+        <line num="42" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="44" count="2" type="stmt"/>
+        <line num="55" count="1" type="stmt"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="74" count="0" type="stmt"/>
+        <line num="75" count="0" type="stmt"/>
+        <line num="76" count="0" type="stmt"/>
+        <line num="80" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="81" count="0" type="stmt"/>
+        <line num="87" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="88" count="0" type="stmt"/>
+        <line num="94" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="95" count="0" type="stmt"/>
+        <line num="103" count="0" type="stmt"/>
+        <line num="110" count="0" type="stmt"/>
+        <line num="118" count="0" type="stmt"/>
+        <line num="119" count="0" type="stmt"/>
+      </file>
+      <file name="geocodeService.ts" path="/home/bogdan/Desktop/weather-alert-notifier/backend/src/services/geocodeService.ts">
+        <metrics statements="13" coveredstatements="5" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="21" count="3" type="stmt"/>
+        <line num="22" count="3" type="stmt"/>
+        <line num="24" count="3" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="27" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="utils">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="cache.ts" path="/home/bogdan/Desktop/weather-alert-notifier/backend/src/utils/cache.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="5" type="stmt"/>
+        <line num="3" count="5" type="stmt"/>
       </file>
     </package>
   </project>
