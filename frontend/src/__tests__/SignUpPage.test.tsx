@@ -5,18 +5,15 @@ import { MemoryRouter, Route, Routes } from "react-router-dom";
 import axios from "axios";
 import SignUpPage from "../components/SignUpPage";
 
-// Mock axios
 jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
-// Mock useNavigate
 const mockNavigate = jest.fn();
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),
   useNavigate: () => mockNavigate,
 }));
 
-// Helper to render with router
 const renderWithRouter = (initialRoute = "/register") => {
   return render(
     <MemoryRouter initialEntries={[initialRoute]}>
@@ -124,7 +121,6 @@ describe("SignUpPage", () => {
       expect(screen.getByText(/passwords do not match/i)).toBeInTheDocument();
     });
 
-    // Verify API was not called
     expect(mockedAxios.post).not.toHaveBeenCalled();
   });
 
@@ -231,14 +227,11 @@ describe("SignUpPage", () => {
     await userInstance.click(submitButton);
 
     await waitFor(() => {
-      expect(
-        screen.getByText(/registration failed. please try again./i)
-      ).toBeInTheDocument();
+      expect(screen.getByText(/network error/i)).toBeInTheDocument();
     });
   });
 
   it("clears error message when user submits form again", async () => {
-    // First attempt - passwords don't match
     await act(async () => {
       renderWithRouter();
     });
@@ -249,7 +242,6 @@ describe("SignUpPage", () => {
     const confirmInput = screen.getByPlaceholderText(/confirm password/i);
     const submitButton = screen.getByRole("button", { name: /sign up/i });
 
-    // First attempt with mismatched passwords
     await userInstance.type(nameInput, "John Doe");
     await userInstance.type(emailInput, "john@example.com");
     await userInstance.type(passwordInput, "password123");
@@ -260,7 +252,6 @@ describe("SignUpPage", () => {
       expect(screen.getByText(/passwords do not match/i)).toBeInTheDocument();
     });
 
-    // Second attempt with matching passwords
     mockedAxios.post.mockResolvedValueOnce({
       data: {
         token: "fake-jwt-token",
@@ -272,7 +263,6 @@ describe("SignUpPage", () => {
     await userInstance.type(confirmInput, "password123");
     await userInstance.click(submitButton);
 
-    // Error should be cleared
     await waitFor(() => {
       expect(
         screen.queryByText(/passwords do not match/i)
@@ -311,12 +301,10 @@ describe("SignUpPage", () => {
       return renderWithRouter();
     });
 
-    // Check that the sign in link exists
     const signInLink = screen.getByRole("link", { name: /sign in/i });
     expect(signInLink).toBeInTheDocument();
     expect(signInLink).toHaveAttribute("href", "/auth");
 
-    // Verify it's inside a paragraph with the correct class
     const paragraph = container.querySelector("p.text-center.text-gray-400");
     expect(paragraph).toBeInTheDocument();
     expect(paragraph).toContainElement(signInLink);

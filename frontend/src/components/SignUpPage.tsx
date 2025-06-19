@@ -15,7 +15,6 @@ export default function SignUpPage() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError(null);
 
     if (password !== confirm) {
       setError("Passwords do not match");
@@ -31,22 +30,22 @@ export default function SignUpPage() {
         email,
         password,
       });
-
+      setError(null);
       localStorage.setItem("token", data.token);
       navigate("/dashboard", { state: { user: data.user } });
     } catch (err: unknown) {
-      if (axios.isAxiosError(err)) {
-        // Your API likely returns { message: string } in the body
-        const msg =
-          (err.response?.data as { message?: string })?.message ||
-          err.message ||
-          "Registration failed. Please try again.";
-        setError(msg);
-      } else if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError("Registration failed. Please try again.");
-      }
+      const message =
+        (axios.isAxiosError(err) &&
+          (err.response?.data as { message?: string })?.message) ||
+        (typeof err === "object" &&
+          err !== null &&
+          // @ts-expect-error  – runtime check is enough
+          err.response?.data?.message) ||
+        (err instanceof Error && err.message) ||
+        // 4. Fallback
+        "Registration failed. Please try again.";
+
+      setError(message);
     }
   };
 

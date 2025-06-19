@@ -13,7 +13,6 @@ export default function AuthPage() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError(null);
 
     try {
       const { data } = await axios.post<{
@@ -23,23 +22,22 @@ export default function AuthPage() {
         email,
         password,
       });
-
+      setError(null);
       localStorage.setItem("token", data.token);
       navigate("/dashboard", { state: { user: data.user } });
     } catch (err: unknown) {
-      // AxiosErrors carry `.response`, plain Errors carry `.message`
-      if (axios.isAxiosError(err)) {
-        const msg =
-          // your backend usually returns { message: string }
-          (err.response?.data as { message?: string })?.message ||
-          err.message ||
-          "Login failed. Please try again.";
-        setError(msg);
-      } else if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError("Login failed. Please try again.");
-      }
+      const message =
+        (axios.isAxiosError(err) &&
+          (err.response?.data as { message?: string })?.message) ||
+        (typeof err === "object" &&
+          err !== null &&
+          // @ts-expect-error – runtime check is enough
+          err.response?.data?.message) ||
+        (err instanceof Error && err.message) ||
+        // 4. Fallback
+        "Login failed. Please try again.";
+
+      setError(message);
     }
   };
 

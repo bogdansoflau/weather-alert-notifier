@@ -1,135 +1,145 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1750337023649" clover="3.2.0">
-  <project timestamp="1750337023649" name="All files">
-    <metrics statements="120" coveredstatements="110" conditionals="49" coveredconditionals="37" methods="32" coveredmethods="27" elements="201" coveredelements="174" complexity="0" loc="120" ncloc="120" packages="1" files="3" classes="3"/>
+<coverage generated="1750344268450" clover="3.2.0">
+  <project timestamp="1750344268450" name="All files">
+    <metrics statements="130" coveredstatements="115" conditionals="74" coveredconditionals="49" methods="32" coveredmethods="27" elements="236" coveredelements="191" complexity="0" loc="130" ncloc="130" packages="1" files="3" classes="3"/>
     <file name="AuthPage.tsx" path="/home/bogdan/Desktop/weather-alert-notifier/frontend/src/components/AuthPage.tsx">
-      <metrics statements="20" coveredstatements="20" conditionals="4" coveredconditionals="4" methods="4" coveredmethods="4"/>
+      <metrics statements="21" coveredstatements="21" conditionals="10" coveredconditionals="8" methods="4" coveredmethods="4"/>
       <line num="1" count="1" type="stmt"/>
-      <line num="3" count="1" type="stmt"/>
       <line num="4" count="1" type="stmt"/>
       <line num="5" count="1" type="stmt"/>
-      <line num="7" count="1" type="stmt"/>
-      <line num="8" count="218" type="stmt"/>
-      <line num="9" count="218" type="stmt"/>
-      <line num="10" count="218" type="stmt"/>
-      <line num="11" count="218" type="stmt"/>
-      <line num="13" count="218" type="stmt"/>
-      <line num="14" count="5" type="stmt"/>
+      <line num="6" count="1" type="stmt"/>
+      <line num="8" count="1" type="stmt"/>
+      <line num="9" count="178" type="stmt"/>
+      <line num="10" count="178" type="stmt"/>
+      <line num="11" count="178" type="stmt"/>
+      <line num="12" count="178" type="stmt"/>
+      <line num="14" count="178" type="stmt"/>
       <line num="15" count="5" type="stmt"/>
       <line num="17" count="5" type="stmt"/>
       <line num="18" count="5" type="stmt"/>
+      <line num="25" count="2" type="stmt"/>
       <line num="26" count="2" type="stmt"/>
       <line num="27" count="2" type="stmt"/>
-      <line num="29" count="3" type="stmt"/>
-      <line num="35" count="218" type="stmt"/>
-      <line num="58" count="114" type="stmt"/>
-      <line num="70" count="86" type="stmt"/>
+      <line num="32" count="3" type="cond" truecount="6" falsecount="2"/>
+      <line num="44" count="3" type="stmt"/>
+      <line num="48" count="178" type="stmt"/>
+      <line num="71" count="102" type="stmt"/>
+      <line num="83" count="64" type="stmt"/>
     </file>
     <file name="MainPage.tsx" path="/home/bogdan/Desktop/weather-alert-notifier/frontend/src/components/MainPage.tsx">
-      <metrics statements="73" coveredstatements="63" conditionals="39" coveredconditionals="27" methods="22" coveredmethods="17"/>
+      <metrics statements="81" coveredstatements="66" conditionals="52" coveredconditionals="31" methods="22" coveredmethods="17"/>
       <line num="1" count="1" type="stmt"/>
       <line num="2" count="1" type="stmt"/>
       <line num="3" count="1" type="stmt"/>
       <line num="4" count="1" type="stmt"/>
       <line num="5" count="1" type="stmt"/>
       <line num="17" count="1" type="stmt"/>
-      <line num="24" count="1" type="stmt"/>
-      <line num="25" count="29" type="stmt"/>
-      <line num="26" count="29" type="stmt"/>
-      <line num="29" count="29" type="stmt"/>
-      <line num="30" count="29" type="cond" truecount="1" falsecount="1"/>
-      <line num="31" count="0" type="stmt"/>
+      <line num="23" count="1" type="stmt"/>
+      <line num="25" count="1" type="stmt"/>
+      <line num="27" count="29" type="stmt"/>
+      <line num="28" count="29" type="stmt"/>
+      <line num="31" count="29" type="stmt"/>
+      <line num="34" count="29" type="stmt"/>
+      <line num="35" count="29" type="stmt"/>
+      <line num="36" count="29" type="stmt"/>
       <line num="37" count="29" type="stmt"/>
-      <line num="38" count="29" type="stmt"/>
-      <line num="39" count="29" type="stmt"/>
       <line num="40" count="29" type="stmt"/>
+      <line num="41" count="29" type="stmt"/>
+      <line num="42" count="29" type="stmt"/>
       <line num="43" count="29" type="stmt"/>
       <line num="44" count="29" type="stmt"/>
       <line num="45" count="29" type="stmt"/>
-      <line num="46" count="29" type="stmt"/>
-      <line num="47" count="29" type="stmt"/>
-      <line num="48" count="29" type="stmt"/>
-      <line num="50" count="29" type="cond" truecount="2" falsecount="0"/>
-      <line num="52" count="29" type="stmt"/>
-      <line num="53" count="4" type="stmt"/>
-      <line num="56" count="29" type="stmt"/>
-      <line num="57" count="4" type="cond" truecount="2" falsecount="2"/>
-      <line num="58" count="0" type="stmt"/>
-      <line num="64" count="0" type="stmt"/>
-      <line num="65" count="0" type="stmt"/>
-      <line num="66" count="0" type="stmt"/>
-      <line num="70" count="29" type="stmt"/>
-      <line num="72" count="3" type="cond" truecount="1" falsecount="1"/>
-      <line num="73" count="3" type="stmt"/>
-      <line num="74" count="3" type="stmt"/>
+      <line num="47" count="29" type="cond" truecount="2" falsecount="0"/>
+      <line num="49" count="29" type="stmt"/>
+      <line num="51" count="3" type="cond" truecount="1" falsecount="1"/>
+      <line num="52" count="3" type="stmt"/>
+      <line num="53" count="3" type="stmt"/>
+      <line num="55" count="0" type="stmt"/>
+      <line num="61" count="29" type="stmt"/>
+      <line num="62" count="4" type="cond" truecount="1" falsecount="1"/>
+      <line num="63" count="4" type="stmt"/>
+      <line num="67" count="29" type="stmt"/>
+      <line num="68" count="4" type="cond" truecount="1" falsecount="1"/>
+      <line num="69" count="4" type="cond" truecount="2" falsecount="2"/>
+      <line num="70" count="0" type="stmt"/>
       <line num="76" count="0" type="stmt"/>
-      <line num="81" count="29" type="stmt"/>
-      <line num="82" count="6" type="stmt"/>
-      <line num="83" count="6" type="stmt"/>
-      <line num="84" count="6" type="stmt"/>
+      <line num="77" count="0" type="stmt"/>
+      <line num="78" count="0" type="stmt"/>
+      <line num="84" count="29" type="stmt"/>
       <line num="85" count="6" type="stmt"/>
-      <line num="88" count="29" type="stmt"/>
-      <line num="89" count="3" type="stmt"/>
-      <line num="90" count="3" type="stmt"/>
-      <line num="91" count="3" type="stmt"/>
-      <line num="94" count="29" type="stmt"/>
-      <line num="95" count="2" type="cond" truecount="2" falsecount="0"/>
-      <line num="96" count="2" type="cond" truecount="1" falsecount="1"/>
-      <line num="97" count="2" type="stmt"/>
-      <line num="98" count="2" type="stmt"/>
-      <line num="99" count="2" type="stmt"/>
+      <line num="86" count="6" type="stmt"/>
+      <line num="87" count="6" type="stmt"/>
+      <line num="88" count="6" type="stmt"/>
+      <line num="91" count="29" type="stmt"/>
+      <line num="92" count="3" type="stmt"/>
+      <line num="93" count="3" type="stmt"/>
+      <line num="94" count="3" type="stmt"/>
+      <line num="97" count="29" type="stmt"/>
+      <line num="98" count="2" type="cond" truecount="2" falsecount="0"/>
+      <line num="99" count="2" type="cond" truecount="3" falsecount="1"/>
       <line num="100" count="2" type="stmt"/>
       <line num="101" count="2" type="stmt"/>
-      <line num="102" count="2" type="stmt"/>
       <line num="103" count="2" type="stmt"/>
       <line num="104" count="2" type="stmt"/>
-      <line num="107" count="0" type="stmt"/>
-      <line num="109" count="2" type="stmt"/>
-      <line num="113" count="29" type="stmt"/>
-      <line num="127" count="29" type="stmt"/>
-      <line num="128" count="28" type="cond" truecount="1" falsecount="1"/>
-      <line num="129" count="28" type="stmt"/>
-      <line num="132" count="29" type="stmt"/>
-      <line num="150" count="3" type="stmt"/>
-      <line num="153" count="2" type="stmt"/>
-      <line num="163" count="3" type="stmt"/>
-      <line num="166" count="3" type="stmt"/>
-      <line num="177" count="0" type="stmt"/>
-      <line num="191" count="0" type="stmt"/>
-      <line num="201" count="0" type="stmt"/>
-      <line num="236" count="28" type="stmt"/>
-      <line num="261" count="14" type="stmt"/>
-      <line num="272" count="2" type="stmt"/>
+      <line num="105" count="2" type="stmt"/>
+      <line num="106" count="2" type="stmt"/>
+      <line num="107" count="2" type="stmt"/>
+      <line num="108" count="2" type="stmt"/>
+      <line num="112" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="114" count="0" type="cond" truecount="0" falsecount="3"/>
+      <line num="117" count="0" type="stmt"/>
+      <line num="120" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="121" count="0" type="stmt"/>
+      <line num="125" count="0" type="stmt"/>
+      <line num="128" count="2" type="stmt"/>
+      <line num="133" count="29" type="stmt"/>
+      <line num="147" count="29" type="stmt"/>
+      <line num="148" count="28" type="cond" truecount="1" falsecount="1"/>
+      <line num="149" count="28" type="stmt"/>
+      <line num="153" count="29" type="cond" truecount="1" falsecount="1"/>
+      <line num="154" count="0" type="stmt"/>
+      <line num="161" count="29" type="stmt"/>
+      <line num="179" count="3" type="stmt"/>
+      <line num="182" count="2" type="stmt"/>
+      <line num="192" count="3" type="stmt"/>
+      <line num="195" count="3" type="stmt"/>
+      <line num="206" count="0" type="stmt"/>
+      <line num="220" count="0" type="stmt"/>
+      <line num="230" count="0" type="stmt"/>
+      <line num="265" count="28" type="stmt"/>
+      <line num="290" count="14" type="stmt"/>
+      <line num="301" count="2" type="stmt"/>
     </file>
     <file name="SignUpPage.tsx" path="/home/bogdan/Desktop/weather-alert-notifier/frontend/src/components/SignUpPage.tsx">
-      <metrics statements="27" coveredstatements="27" conditionals="6" coveredconditionals="6" methods="6" coveredmethods="6"/>
+      <metrics statements="28" coveredstatements="28" conditionals="12" coveredconditionals="10" methods="6" coveredmethods="6"/>
       <line num="1" count="1" type="stmt"/>
-      <line num="3" count="1" type="stmt"/>
       <line num="4" count="1" type="stmt"/>
       <line num="5" count="1" type="stmt"/>
-      <line num="7" count="1" type="stmt"/>
-      <line num="8" count="336" type="stmt"/>
-      <line num="9" count="336" type="stmt"/>
-      <line num="10" count="336" type="stmt"/>
-      <line num="11" count="336" type="stmt"/>
-      <line num="12" count="336" type="stmt"/>
-      <line num="13" count="336" type="stmt"/>
-      <line num="15" count="336" type="stmt"/>
-      <line num="16" count="6" type="stmt"/>
+      <line num="6" count="1" type="stmt"/>
+      <line num="8" count="1" type="stmt"/>
+      <line num="9" count="334" type="stmt"/>
+      <line num="10" count="334" type="stmt"/>
+      <line num="11" count="334" type="stmt"/>
+      <line num="12" count="334" type="stmt"/>
+      <line num="13" count="334" type="stmt"/>
+      <line num="14" count="334" type="stmt"/>
+      <line num="16" count="334" type="stmt"/>
       <line num="17" count="6" type="stmt"/>
       <line num="19" count="6" type="cond" truecount="2" falsecount="0"/>
       <line num="20" count="2" type="stmt"/>
       <line num="21" count="2" type="stmt"/>
       <line num="24" count="4" type="stmt"/>
       <line num="25" count="4" type="stmt"/>
+      <line num="33" count="2" type="stmt"/>
       <line num="34" count="2" type="stmt"/>
       <line num="35" count="2" type="stmt"/>
-      <line num="37" count="2" type="stmt"/>
-      <line num="43" count="336" type="stmt"/>
-      <line num="66" count="48" type="stmt"/>
-      <line num="78" count="112" type="stmt"/>
-      <line num="90" count="66" type="stmt"/>
-      <line num="102" count="90" type="stmt"/>
+      <line num="40" count="2" type="cond" truecount="6" falsecount="2"/>
+      <line num="52" count="2" type="stmt"/>
+      <line num="56" count="334" type="stmt"/>
+      <line num="79" count="48" type="stmt"/>
+      <line num="91" count="112" type="stmt"/>
+      <line num="103" count="66" type="stmt"/>
+      <line num="115" count="90" type="stmt"/>
     </file>
   </project>
 </coverage>

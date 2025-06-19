@@ -19,7 +19,6 @@ jest.mock("../services/weatherService", () => ({
       temp: { max: 30 - i, min: 20 - i },
       weather: [{ description: "clear sky", icon: "clear_day" }],
     })),
-    /* 5 alerts so 'Show all' link appears */
     alerts: Array.from({ length: 5 }, (_, i) => ({
       id: `a${i}`,
       title: `Alert #${i}`,
@@ -33,7 +32,6 @@ jest.mock("../services/weatherService", () => ({
 
 import MainPage from "../components/MainPage";
 
-/* helper to render with router/user in location.state */
 const user = { id: "u1", name: "Test User", email: "test@example.com" };
 const renderWithRouter = () =>
   render(
@@ -45,12 +43,10 @@ const renderWithRouter = () =>
   );
 
 describe("MainPage UI flow", () => {
-  // Create a user instance for each test with proper typing
   let userInstance: UserEvent;
 
   beforeEach(() => {
     userInstance = userEvent.setup();
-    // Clear all mocks before each test
     jest.clearAllMocks();
   });
 
@@ -76,7 +72,6 @@ describe("MainPage UI flow", () => {
     const searchInput = screen.getByPlaceholderText(/search city/i);
     await userInstance.type(searchInput, "Ro");
 
-    /* suggestion appears (debounced) */
     const suggestion = await screen.findByText("Rome, Italy");
     await userInstance.click(suggestion);
 
@@ -92,7 +87,6 @@ describe("MainPage UI flow", () => {
       renderWithRouter();
     });
 
-    /* complete the search flow */
     const searchInput = screen.getByPlaceholderText(/search city/i);
     await userInstance.type(searchInput, "Ro");
 
@@ -102,7 +96,6 @@ describe("MainPage UI flow", () => {
     const goButton = screen.getByRole("button", { name: /go/i });
     await userInstance.click(goButton);
 
-    // Wait for all the expected content to appear
     await waitFor(() => {
       expect(screen.getByText(/today/i)).toBeInTheDocument();
     });
@@ -111,7 +104,6 @@ describe("MainPage UI flow", () => {
       expect(screen.getByText(/25°C/)).toBeInTheDocument();
     });
 
-    /* each card shows "° /" in the high/low line */
     await waitFor(() => {
       const tempLines = screen.getAllByText(/°\s*\/\s*\d+°/);
       expect(tempLines).toHaveLength(7);
@@ -123,7 +115,6 @@ describe("MainPage UI flow", () => {
       renderWithRouter();
     });
 
-    /* trigger flow quickly */
     const searchInput = screen.getByPlaceholderText(/search city/i);
     await userInstance.type(searchInput, "Ro");
 
@@ -144,7 +135,6 @@ describe("MainPage UI flow", () => {
       expect(listItems).toHaveLength(3);
     });
 
-    /* click to expand */
     const showAllButton = await screen.findByRole("button", {
       name: /show all/i,
     });
@@ -155,7 +145,6 @@ describe("MainPage UI flow", () => {
       expect(listItems).toHaveLength(5);
     });
 
-    /* collapse again */
     const hideButton = await screen.findByRole("button", {
       name: /hide extra alerts/i,
     });
