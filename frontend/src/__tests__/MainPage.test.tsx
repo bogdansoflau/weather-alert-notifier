@@ -25,9 +25,9 @@ jest.mock("../services/weatherService", () => ({
       message: `Message ${i}`,
     })),
   }),
-
-  fetchUserHistory: jest.fn().mockResolvedValue([]),
-  saveSearch: jest.fn(),
+  fetchSavedLocations: jest.fn().mockResolvedValue([]),
+  addSavedLocation: jest.fn().mockResolvedValue([]),
+  removeSavedLocation: jest.fn().mockResolvedValue([]),
 }));
 
 import MainPage from "../components/MainPage";
