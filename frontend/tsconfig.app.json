@@ -21,7 +21,10 @@
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+
+    /* Add these so TS picks up jest + jest-dom matchers */
+    "types": ["jest", "node", "@testing-library/jest-dom"]
   },
   "include": ["src"]
 }

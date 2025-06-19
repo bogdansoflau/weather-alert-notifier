@@ -7,8 +7,8 @@ on:
     branches: ["**"]
 
 jobs:
-  ci:
-    name: Build & Test
+  ci-backend:
+    name: Backend - Build & Test
     runs-on: ubuntu-latest
 
     strategy:
@@ -48,15 +48,82 @@ jobs:
         working-directory: ./backend
         run: npm run build
 
-      - name: Run tests + coverage
+      - name: Run tests
         working-directory: ./backend
         env:
           CI: true
-          JWT_SECRET: ${{secrets.JWT_SECRET}}
-        run: npm test -- --coverage
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+        run: npm test
+
+      - name: Check coverage thresholds
+        working-directory: ./backend
+        env:
+          CI: true
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+        run: npm test -- --coverage --coverageThreshold='{"global":{"branches":80,"functions":80,"lines":80,"statements":80}}'
+        continue-on-error: true
 
       - name: Upload code coverage
         uses: actions/upload-artifact@v4
         with:
           name: coverage-report-node-${{ matrix.node-version }}
           path: backend/coverage/
+
+  ci-frontend:
+    name: Frontend - Build & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js 18.x
+        uses: actions/setup-node@v4
+        with: { node-version: 18.x }
+
+      - name: Cache frontend npm
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-frontend-npm-${{ hashFiles('frontend/package-lock.json') }}
+          restore-keys: ${{ runner.os }}-frontend-npm-
+
+      - name: Install deps
+        working-directory: frontend
+        run: npm ci
+
+      - name: Lint
+        working-directory: frontend
+        run: npm run lint
+
+      - name: Build (vite)
+        working-directory: frontend
+        run: npm run build
+
+      - name: Test + coverage
+        working-directory: frontend
+        env: { CI: true }
+        run: npm run test:ci
+
+      - name: Upload frontend coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-frontend
+          path: frontend/coverage/
+
+  ci-success:
+    name: CI Success
+    needs: [ci-backend, ci-frontend]
+    runs-on: ubuntu-latest
+    if: always() # Run even if jobs failed, to report status
+    steps:
+      - name: Check job statuses
+        run: |
+          if [[ "${{ needs.ci-backend.result }}" != "success" ]]; then
+            echo "Backend CI failed"
+            exit 1
+          fi
+          if [[ "${{ needs.ci-frontend.result }}" != "success" ]]; then
+            echo "Frontend CI failed"
+            exit 1
+          fi
+          echo "All CI checks passed successfully!"

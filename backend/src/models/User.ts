@@ -1,12 +1,31 @@
 import mongoose, { Document, Schema } from "mongoose";
 import bcrypt from "bcryptjs";
 
+export interface SavedLocation {
+  id: string;
+  name: string;
+  lat: number;
+  lon: number;
+}
+
 export interface IUser extends Document {
   name: string;
   email: string;
   password: string;
   comparePassword(candidate: string): Promise<boolean>;
+
+  savedLocations: SavedLocation[];
 }
+
+const SavedLocationSchema = new Schema<SavedLocation>(
+  {
+    id: { type: String, required: true },
+    name: { type: String, required: true },
+    lat: { type: Number, required: true },
+    lon: { type: Number, required: true },
+  },
+  { _id: false }
+);
 
 const userSchema = new Schema<IUser>(
   {
@@ -19,6 +38,10 @@ const userSchema = new Schema<IUser>(
       trim: true,
     },
     password: { type: String, required: true },
+    savedLocations: {
+      type: [SavedLocationSchema],
+      default: [],
+    },
   },
   { timestamps: true }
 );

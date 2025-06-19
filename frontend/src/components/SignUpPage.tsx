@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import type { FormEvent } from "react";
+import type { User } from "../types";
 import { FaUser, FaLock } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -14,7 +15,6 @@ export default function SignUpPage() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError(null);
 
     if (password !== confirm) {
       setError("Passwords do not match");
@@ -22,21 +22,30 @@ export default function SignUpPage() {
     }
 
     try {
-      const { data } = await axios.post(
-        "http://localhost:3001/api/auth/register",
-        {
-          name,
-          email,
-          password,
-        }
-      );
-
+      const { data } = await axios.post<{
+        token: string;
+        user: User;
+      }>("http://localhost:3001/api/auth/register", {
+        name,
+        email,
+        password,
+      });
+      setError(null);
       localStorage.setItem("token", data.token);
       navigate("/dashboard", { state: { user: data.user } });
-    } catch (err: any) {
-      setError(
-        err.response?.data?.message || "Registration failed. Please try again."
-      );
+    } catch (err: unknown) {
+      const message =
+        (axios.isAxiosError(err) &&
+          (err.response?.data as { message?: string })?.message) ||
+        (typeof err === "object" &&
+          err !== null &&
+          // @ts-expect-error  – runtime check is enough
+          err.response?.data?.message) ||
+        (err instanceof Error && err.message) ||
+        // 4. Fallback
+        "Registration failed. Please try again.";
+
+      setError(message);
     }
   };
 
