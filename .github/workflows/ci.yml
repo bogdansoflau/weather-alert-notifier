@@ -94,7 +94,7 @@ jobs:
       - name: Test + coverage
         working-directory: frontend
         env: { CI: true }
-        run: npm test -- --coverage
+        run: npm run test:ci
 
       - name: Upload frontend coverage
         uses: actions/upload-artifact@v4
